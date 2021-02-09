@@ -1,3 +1,4 @@
+#! /home/shailen/miniconda2/bin/python
 """
 This program evolves the following coupled ODEs with dichotomous noise, using predictor-corrector method:
 dx1/dt = ...
@@ -232,10 +233,11 @@ def evolution():
 	#~ plt.tight_layout()
 	#~ plt.show()
 	return 0
+
 	
 def plotting():
 	attempt = input("Attempt number for plotting: ", ) # Return a string
-	data = np.loadtxt("data/xy_t-"+str(attempt)+".txt")
+	data = np.loadtxt("data/xy-t_"+str(attempt)+".txt")
 	t = data[:,0]
 	X = data[:,1]
 	Y = data[:,2]
@@ -250,9 +252,26 @@ def plotting():
 	plt.tight_layout()
 	plt.show()
 
+def amplitude():
+	attempts = range(4,5)
+	A1 = []
+	A2 = []
+	for attempt in attempts:
+		#~ attempt = input("Attempt number for plotting: ", ) # Return a string
+		data = np.loadtxt("data/xy-t_"+str(attempt)+".txt")
+		a1 = np.max(data[:,1]) - np.mean(data[:,1])
+		a2 = np.max(data[:,2]) - np.mean(data[:,2])
+		A1.append(a1)
+		A2.append(a2)
+	A1 = np.array(A1)
+	A2 = np.array(A2)
+	np.savetxt("amplitudes.txt", np.column_stack((A1, A2)))
+	#~ print(A1, A2)
+	
 if __name__ == '__main__':
 	#~ generate_DN()
 	#~ statistics_of_DN()
 	#~ evolution()
-	plotting()
+	#~ plotting()
+	#~ amplitude()
 	print ("Check if any function is selected otherwise it is Successful !")
