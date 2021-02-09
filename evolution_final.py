@@ -1,4 +1,3 @@
-#! /home/shailen/miniconda2/bin/python
 """
 This program evolves the following coupled ODEs with dichotomous noise, using predictor-corrector method:
 dx1/dt = ...
